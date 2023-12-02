@@ -5,6 +5,9 @@
 #include <QGraphicsView>
 #include <QPushButton>
 #include "NIVEL1.h"
+#include "morty.h"
+#include "personaje.h"
+#include "arma.h"
 
 int ancho_pantalla= 1280;
 int alto_pantalla=722;
@@ -92,11 +95,44 @@ void MainWindow::on_Nivel1_Clicked()
     nivel1->hide();
     nivel2->hide();
 
-    //Llamo a la función que pone a correr el nivel uno con los Qtimers y todo
-    bool continuarj=true;
-    while(continuarj){
-        continuidadnivel1(continuarj);
+    personaje* hepatitisB = new personaje();
+    string cara1 = ":/img/hepatitisb1.png";
+    string cara2 = ":/img/hepatitisb2.png";
+    string cara3 = ":/img/hepatitisb3.png";
+    hepatitisB->constructor(775.0, 400.0, 0.0, 0.0, false, 405.0, 350.0, 1280.0, 722.0);
+    hepatitisB->setPixmap(QPixmap(":/img/hepatitisb1.png"));
+    //hepatitisB->caras[1] = cara1; hepatitisB->caras[2] = cara2; hepatitisB->caras[3] = cara3;
+    hepatitisB->setPos(hepatitisB->xIn, hepatitisB->yIn);
+    scene->addItem(hepatitisB);
+    //int vidaMorty = morty.getVida();
+    while(true){
+        int vidaHepa = hepatitisB->getSalud();
+        while(vidaHepa >= 0){
+            double ang = hepatitisB->angAleatorio();
+            QTimer * cronometro = new QTimer(this);
+            connect(cronometro, &QTimer::timeout, [&](){
+                arma bola;
+                // Crear la partícula y dibujarla
+                QGraphicsEllipseItem particle(0, 0, 20, 20);
+                particle.setBrush(Qt::yellow);
+                scene->addItem(&particle);
+                QTimer * timerBola = new QTimer(this);
+                connect(cronometro, &QTimer::timeout, [&](){
+                    bool boot = true;
+                    bola.constructor(775.0, 400.0, ang, 50, false, 20, 20, 1280, 722);
+                    bola.jump();
+                    bola.collide(boot);
+                    particle.setPos(bola.coordX, bola.coordY);
+                });
+                timerBola->start(10);
+            });
+            cronometro->start(3000);
+
+            break;
+        }
+        break;
     }
+
 }
 
 void MainWindow::on_Nivel2_Clicked()

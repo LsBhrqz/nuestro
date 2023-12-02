@@ -16,6 +16,8 @@
 #include <string>
 #include <vector>
 #include <time.h>
+#include <ctime>
+
 
 using namespace std;
 
@@ -47,11 +49,11 @@ public:
 
     void setValues();
 
-    void collide();
+    void collide(bool f);
 
     void jump();
 
-    double bounce(double _velEvent);
+    double bounce(double _velEvent, bool h);
 
     void updateValues();
 

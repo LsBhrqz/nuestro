@@ -2,9 +2,10 @@
 
 bool arma::impacto(int tiempoExplosion){
     while(tiempoExplosion >= 0){
+        bool action = true;
         //Colisiones en el eje horizontal
         if(coordX > (anchoPant - anchoObj) || coordX < anchoObj){
-            velX = bounce(velX);
+            velX = bounce(velX, action);
 
             if(coordX > (anchoPant - anchoObj)){
                 xIn = coordX - 1;
@@ -26,7 +27,7 @@ bool arma::impacto(int tiempoExplosion){
 
         if(coordY > (altoPant - altoObj) || coordY < altoObj){
 
-            velY = bounce(velY);
+            velY = bounce(velY, action);
 
             if(coordY > (altoPant - altoObj)){
                 yIn = coordY - 1;

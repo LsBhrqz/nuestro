@@ -12,12 +12,13 @@ private:
     int saludMorty;
     arma equipada;
 public:
-    Morty();
-    QRectF boundingRect() const;
-    void manejarMorty();
+    //Morty();
+    //QRectF boundingRect() const;
+    /*void manejarMorty();
     void dispararMorty();
     void gameOver();
-    void paint(QPainter *painter);
+    //void paint(QPainter *painter);
+    */
     int getVida();
 
 };

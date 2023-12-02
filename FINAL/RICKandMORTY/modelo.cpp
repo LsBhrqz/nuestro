@@ -40,11 +40,12 @@ void modelo::jump(){
 double modelo::bounce(double velEvent, bool action){
     if(action){
         velEvent = -velEvent * coefRest;
-        return velEvent;
+
     }
     else{
         velEvent = 0;
     }
+    return velEvent;
 }
 
 void modelo::collide(bool action){
@@ -73,7 +74,7 @@ void modelo::collide(bool action){
     //Colisiones en el eje vertical
 
     if(coordY > (altoPant - altoObj) || coordY < altoObj){
-        velY = bounce(velY);
+        velY = bounce(velY, action);
 
         if(coordY > (altoPant - altoObj)){
             yIn = coordY - 1;

@@ -2,13 +2,15 @@
 #define PERSONAJE_H
 #include <modelo.h>
 #include <arma.h>
+#include "QGraphicsItem"
 
-class personaje : public modelo{
+
+class personaje : public modelo, public QGraphicsPixmapItem{
 private:
-    int salud;
+    int salud=100;
 public:
+    personaje();
     int getSalud();
-    void disparar(string cara, double angulo);
     void morir();
     void herido();
 };

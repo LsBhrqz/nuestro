@@ -6,7 +6,7 @@ class arma : public modelo{
 public:
     bool impacto(int tiempoExplosion);
     bool impacto();
-    bool impacto(double _coordXenemigo, double _coordYenemigo);
+    bool impacto(double _coordXenemigo, double _coordYenemigo, double anchoEnemigo, double altoEnemigo);
 };
 
 
