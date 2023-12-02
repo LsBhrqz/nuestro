@@ -9,3 +9,7 @@ void Morty::paint(QPainter *painter){
     pixmap.load(":/img/Mortyfrente.png");
     painter->drawPixmap(boundingRect(), pixmap, pixmap.rect());
 }
+
+int Morty::getVida(){
+    return saludMorty;
+}

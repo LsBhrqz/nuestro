@@ -18,6 +18,7 @@ public:
     void dispararMorty();
     void gameOver();
     void paint(QPainter *painter);
+    int getVida();
 
 };
 

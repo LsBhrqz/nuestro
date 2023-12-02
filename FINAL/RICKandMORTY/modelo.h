@@ -1,6 +1,6 @@
 #ifndef MODELO_H
 #define MODELO_H
-
+#include <cstdlib>
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -13,14 +13,15 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
+#include <string>
+#include <vector>
+#include <time.h>
 
-class modelo : public QObject
-{
-        Q_OBJECT
+using namespace std;
 
-private:
+class modelo : public QObject{
+public:
     bool movimiento = true;
-
     double velInicial;
     double angTiro;
     double velX = 0;
@@ -28,7 +29,7 @@ private:
     double velInY;
     double velInX;
     float coefRest;
-    double gravedad;
+    vector <string> caras;
     double xIn;
     double yIn;
     double coordX;
@@ -38,9 +39,12 @@ private:
     double anchoPant;
     double altoPant;
 
-public:
     void constructor(double _xIn, double _yIn, double _angTiro, double _velInicial, bool _Grav, double _anchoObj, double _altoObj, double _anchoPant, double _altoPant);
+
     double tiempo = 0.05;
+    double tiempoGeneral = 0;
+    double gravedad;
+
     void setValues();
 
     void collide();
@@ -56,5 +60,8 @@ public:
     double getcoordX();
 
     double getcoordY();
+
+    double angAleatorio();
 };
+
 #endif // MODELO_H
