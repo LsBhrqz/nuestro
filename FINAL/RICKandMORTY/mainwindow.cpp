@@ -79,15 +79,8 @@ void MainWindow::on_Nivel1_Clicked()
     hepatitisB->constructor(775.0, 400.0, 0.0, 0.0, false, 405.0, 350.0, 1280.0, 722.0);
     hepatitisB->setPos(hepatitisB->xIn, hepatitisB->yIn);
     scene->addItem(hepatitisB);
-    yoeralabola();
-    //particle = new QGraphicsEllipseItem(0, 0, 30, 30);
-    //particle->setPos(750,400);
-    qDebug() << "PosPart: " << particle->pos() << hepatitisB->pos();
-    //particle->setBrush(Qt::yellow);
-    //scene->addItem(particle);
-    //particle->show();
-    arma* bola = new arma;
-    bola->constructor(750, 400, 200, 5, false, 30, 30, 1280, 722);
+
+
     QTimer * cronometro = new QTimer(this);
     connect(cronometro, &QTimer::timeout, [=](){
         if(hepatitisB->cara == 0){
@@ -95,13 +88,11 @@ void MainWindow::on_Nivel1_Clicked()
         }else if (hepatitisB->cara == 1){
             hepatitisB->setPixmap(QPixmap(":/img/hepatitisb2.png"));
         }else{
-
             hepatitisB->setPixmap(QPixmap(":/img/hepatitisb3.png"));
-
-
+            arma* bola = new arma;
+            bola->constructor(890, 460, 190, 20, false, 30, 30, 1280, 722);
+            yoeralabola();
             disparar(bola);
-
-
 }
         hepatitisB->cambiarCara();
     });
@@ -120,22 +111,23 @@ void MainWindow::disparar(arma *bola){
 
     tiempoTiro = new QTimer(this);
     connect(tiempoTiro, &QTimer::timeout, [=](){
+
         bola->jump();
         bola->impacto();
 
         if(bola->movimiento){
+
             tiempoTiro->stop();
+            particle->hide();
+
         }
         else{
             particle->setPos(bola->coordX, bola->coordY);
-            //particle->setPos(particle->x()-10,particle->y()+5);
-            qDebug() << "Posición de la partícula: " << particle->pos();
-            //particle->show();
             bola->tiempo +=0.5;
         }
     });
 
-    tiempoTiro->start(100);
+    tiempoTiro->start(10);
 }
 
 void MainWindow::on_Nivel2_Clicked()

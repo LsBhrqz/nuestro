@@ -60,12 +60,12 @@ void arma::impacto(){
     if(coordX > (anchoPant - anchoObj) || coordX < 0){
         movimiento = true;
     }
-
     else if(coordY > (altoPant - altoObj) || coordY < 0){
         movimiento = true;
     }
-
+    else{
     movimiento = false;
+    }
 }
 
 bool arma::impacto(double coordXenemigo, double coordYenemigo, double anchoEnemigo, double altoEnemigo){

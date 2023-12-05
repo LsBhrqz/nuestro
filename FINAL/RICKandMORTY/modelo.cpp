@@ -130,6 +130,6 @@ double modelo::getcoordY(){
 
 double modelo::angAleatorio(){
     srand(time(NULL));
-    int num = 180 + rand()% (271 - 180);
-    return num;
+    double angPar = 90 + rand()% (271 - 90);
+    return angPar;
 }

@@ -3,8 +3,6 @@
 
 #include <arma.h>
 
-
-
 class personaje : public modelo, public QGraphicsPixmapItem{
 private:
     int salud;
