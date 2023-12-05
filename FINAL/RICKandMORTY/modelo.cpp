@@ -138,18 +138,59 @@ double modelo::angAleatorio(){
     return num;
 }
 
-/*
+
 void modelo::colisionEnemigo(double posInX, double posInY, double anchoIn, double altoIn, double posDestX, double posDestY, double anchoDest, double altoDest){
+
     int arreglo1[4]={posInX,posInY,anchoIn,altoIn};
     int arreglo2[4]={posDestX,posDestY,anchoDest, altoDest};
-    int interseccion[4]={0,0,0,0};
     int x=0,y=1, w=2,h=3;
 
-    //Primero comparo si los arreglos son iguales
+    int arreglomayorx[4];
+    //int arreglomayory[4];
+    //int arreglomenory[4];
+    int arreglomenorx[4];
+
+    if(arreglo1[x]<= arreglo2[x]){
+        for(int i=0; i<4;i++){
+            arreglomayorx[i]=arreglo2[i];
+            arreglomenorx[i]=arreglo1[i];
+        }
+    }else{
+        for(int i=0; i<4;i++){
+            arreglomayorx[i]=arreglo1[i];
+            arreglomenorx[i]=arreglo2[i];
+        }
+    }
+/*
+    if(arreglo1[y]<= arreglo2[y]){
+        for(int i=0; i<4;i++){
+            arreglomayory[i]=arreglo2[i];
+            arreglomenory[i]=arreglo1[i];
+        }
+    }else{
+        for(int i=0; i<4;i++){
+            arreglomayory[i]=arreglo1[i];
+            arreglomenory[i]=arreglo2[i];
+        }
+    }
+
+*/
+    //verifico que estén dentro en la x
+    if((arreglomenorx[x]+arreglomenorx[w])>=arreglomayorx[x]){
+        colEnemigo=true;
+    }else{
+        colEnemigo=false;
+    }
+
+
+/*
+    //Primero comparo si los arreglos son iguales en X
     if(arreglo1[x]==arreglo2[x] && (arreglo1[x]+arreglo1[w] == arreglo2[x]+ arreglo2[w]) ){
+        //Ahora comparo si son iguales en y
         if(arreglo1[y]==arreglo2[y] && (arreglo1[y]+arreglo1[h] == arreglo2[y]+ arreglo2[h])){
             interseccion[x]= arreglo1[x];interseccion[y]= arreglo1[y];
             interseccion[w]= arreglo1[w];interseccion[h]= arreglo1[h];
+            //Quiere decir que son exactamente el mismo
             colEnemigo = true;
         }
     }else{
@@ -158,7 +199,8 @@ void modelo::colisionEnemigo(double posInX, double posInY, double anchoIn, doubl
         //Comparo las x
         if((arreglo1[x] >= arreglo2[x])){
             //Determino la que está más a la derecha
-            interseccion[x]=arreglo1[x];
+
+            //interseccion[x]=arreglo1[x];
 
             //Verifico si la interseccion no existe
             if((arreglo2[x] + arreglo2[w]) <= arreglo1[x]){
@@ -226,7 +268,8 @@ void modelo::colisionEnemigo(double posInX, double posInY, double anchoIn, doubl
             }
         }
     }
-    for(int i = 0; i<4; i++){
+    //arreglar condición
+    for(int i = 2; i<4; i++){
         if(interseccion[i] == 0){
             colEnemigo = false;
         }
@@ -235,6 +278,5 @@ void modelo::colisionEnemigo(double posInX, double posInY, double anchoIn, doubl
             break;
         }
 
-    }
+    }*/
 }
-*/

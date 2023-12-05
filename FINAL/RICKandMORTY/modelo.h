@@ -65,7 +65,7 @@ public:
 
     double getcoordY();
 
-    //void colisionEnemigo(double posInX, double posInY, double anchoIn, double altoIn, double posDestX, double posDestY, double anchoDest, double altoDest);
+    void colisionEnemigo(double posInX, double posInY, double anchoIn, double altoIn, double posDestX, double posDestY, double anchoDest, double altoDest);
 
     double angAleatorio();
 };

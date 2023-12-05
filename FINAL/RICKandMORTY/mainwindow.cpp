@@ -94,6 +94,7 @@ void MainWindow::dispararlaser(arma *laser){
     connect(Laser, &QTimer::timeout, [=](){
         laser->jump();
         laser->impacto();
+
         if(laser->movimiento){
             Laser->stop();
             //delete tiempoTiro;
@@ -103,6 +104,11 @@ void MainWindow::dispararlaser(arma *laser){
         else{
             laser->setPos(laser->coordX, laser->coordY);
             laser->tiempo +=0.5;
+            laser->colisionEnemigo(laser->coordX, laser->coordY, laser->anchoObj, laser->altoObj, hepatitisB->coordX, hepatitisB->coordY, hepatitisB->anchoObj, hepatitisB->altoObj );
+            if(laser->colEnemigo){
+                hepatitisB->hide();
+            }
+
         }
     });
     Laser->start(10);
@@ -169,6 +175,8 @@ void MainWindow::on_Nivel1_Clicked()
         hepatitisB->cambiarCara();
     });
     cronometro->start(500);
+
+
 }
 
 void MainWindow::yoeralabola(){
