@@ -2,9 +2,6 @@
 #define MORTY_H
 
 #include "arma.h"
-#include <QGraphicsItem>
-#include <QPainter>
-#include "modelo.h"
 
 class Morty : public modelo
 {

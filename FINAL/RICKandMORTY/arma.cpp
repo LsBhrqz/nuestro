@@ -56,16 +56,16 @@ bool arma::impacto(int tiempoExplosion){
 }
 
 
-bool arma::impacto(){
-    if(coordX > (anchoPant - anchoObj) || coordX < anchoObj){
-        return true;
+void arma::impacto(){
+    if(coordX > (anchoPant - anchoObj) || coordX < 0){
+        movimiento = true;
     }
 
-    else if(coordY > (altoPant - altoObj) || coordY < altoObj){
-        return true;
+    else if(coordY > (altoPant - altoObj) || coordY < 0){
+        movimiento = true;
     }
 
-    return false;
+    movimiento = false;
 }
 
 bool arma::impacto(double coordXenemigo, double coordYenemigo, double anchoEnemigo, double altoEnemigo){
@@ -74,4 +74,3 @@ bool arma::impacto(double coordXenemigo, double coordYenemigo, double anchoEnemi
 
     return false;
 }
-

@@ -1,18 +1,21 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
-#include <modelo.h>
+
 #include <arma.h>
-#include "QGraphicsItem"
+
 
 
 class personaje : public modelo, public QGraphicsPixmapItem{
 private:
-    int salud=100;
+    int salud;
+
 public:
     personaje();
+    int cara;
     int getSalud();
     void morir();
     void herido();
+    void cambiarCara();
 };
 
 #endif // PERSONAJE_H

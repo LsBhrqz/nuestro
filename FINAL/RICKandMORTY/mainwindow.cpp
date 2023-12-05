@@ -1,13 +1,4 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <QGraphicsItem>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QPushButton>
-#include "NIVEL1.h"
-#include "morty.h"
-#include "personaje.h"
-#include "arma.h"
 
 int ancho_pantalla= 1280;
 int alto_pantalla=722;
@@ -70,16 +61,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(nivel2, &QPushButton::clicked, this, &MainWindow::on_Nivel2_Clicked);
 }
 
-MainWindow::~MainWindow()
-{
-    delete scene;
-    scene = nullptr;
-    delete ui;
-    delete JUGAR;
-    delete nivel1;
-    delete nivel2;
-}
-
 
 void MainWindow::on_JUGAR_Clicked()
 {
@@ -94,50 +75,85 @@ void MainWindow::on_Nivel1_Clicked()
     scene->setBackgroundBrush(QPixmap(":/img/fondohepatitisB.png").scaled(ancho_pantalla, alto_pantalla));
     nivel1->hide();
     nivel2->hide();
-
-    personaje* hepatitisB = new personaje();
-    string cara1 = ":/img/hepatitisb1.png";
-    string cara2 = ":/img/hepatitisb2.png";
-    string cara3 = ":/img/hepatitisb3.png";
+    hepatitisB = new personaje();
     hepatitisB->constructor(775.0, 400.0, 0.0, 0.0, false, 405.0, 350.0, 1280.0, 722.0);
-    hepatitisB->setPixmap(QPixmap(":/img/hepatitisb1.png"));
-    //hepatitisB->caras[1] = cara1; hepatitisB->caras[2] = cara2; hepatitisB->caras[3] = cara3;
     hepatitisB->setPos(hepatitisB->xIn, hepatitisB->yIn);
     scene->addItem(hepatitisB);
-    //int vidaMorty = morty.getVida();
-    while(true){
-        int vidaHepa = hepatitisB->getSalud();
-        while(vidaHepa >= 0){
-            double ang = hepatitisB->angAleatorio();
-            QTimer * cronometro = new QTimer(this);
-            connect(cronometro, &QTimer::timeout, [&](){
-                arma bola;
-                // Crear la partícula y dibujarla
-                QGraphicsEllipseItem particle(0, 0, 20, 20);
-                particle.setBrush(Qt::yellow);
-                scene->addItem(&particle);
-                QTimer * timerBola = new QTimer(this);
-                connect(cronometro, &QTimer::timeout, [&](){
-                    bool boot = true;
-                    bola.constructor(775.0, 400.0, ang, 50, false, 20, 20, 1280, 722);
-                    bola.jump();
-                    bola.collide(boot);
-                    particle.setPos(bola.coordX, bola.coordY);
-                });
-                timerBola->start(10);
-            });
-            cronometro->start(3000);
+    yoeralabola();
+    //particle = new QGraphicsEllipseItem(0, 0, 30, 30);
+    //particle->setPos(750,400);
+    qDebug() << "PosPart: " << particle->pos() << hepatitisB->pos();
+    //particle->setBrush(Qt::yellow);
+    //scene->addItem(particle);
+    //particle->show();
+    arma* bola = new arma;
+    bola->constructor(750, 400, 200, 5, false, 30, 30, 1280, 722);
+    QTimer * cronometro = new QTimer(this);
+    connect(cronometro, &QTimer::timeout, [=](){
+        if(hepatitisB->cara == 0){
+            hepatitisB->setPixmap(QPixmap(":/img/hepatitisb1.png"));
+        }else if (hepatitisB->cara == 1){
+            hepatitisB->setPixmap(QPixmap(":/img/hepatitisb2.png"));
+        }else{
 
-            break;
+            hepatitisB->setPixmap(QPixmap(":/img/hepatitisb3.png"));
+
+
+            disparar(bola);
+
+
+}
+        hepatitisB->cambiarCara();
+    });
+    cronometro->start(2000);
+}
+
+void MainWindow::yoeralabola(){
+    particle = new QGraphicsEllipseItem(0, 0, 30, 30);
+    particle->setBrush(Qt::yellow);
+    particle->setPos(750,400);
+    scene->addItem(particle);
+    particle->show();
+
+}
+void MainWindow::disparar(arma *bola){
+
+    tiempoTiro = new QTimer(this);
+    connect(tiempoTiro, &QTimer::timeout, [=](){
+        bola->jump();
+        bola->impacto();
+
+        if(bola->movimiento){
+            tiempoTiro->stop();
         }
-        break;
-    }
+        else{
+            particle->setPos(bola->coordX, bola->coordY);
+            //particle->setPos(particle->x()-10,particle->y()+5);
+            qDebug() << "Posición de la partícula: " << particle->pos();
+            //particle->show();
+            bola->tiempo +=0.5;
+        }
+    });
 
+    tiempoTiro->start(100);
 }
 
 void MainWindow::on_Nivel2_Clicked()
 {
-    scene->setBackgroundBrush(QPixmap(":/img/fondotuberculosis.jpg").scaled(ancho_pantalla, alto_pantalla));
+    //scene->setBackgroundBrush(QPixmap(":/img/fondotuberculosis.jpg").scaled(ancho_pantalla, alto_pantalla));
     nivel1->hide();
     nivel2->hide();
+}
+
+MainWindow::~MainWindow()
+{
+    delete scene;
+    scene = nullptr;
+    delete ui;
+    delete JUGAR;
+    delete nivel1;
+    delete nivel2;
+    delete hepatitisB;
+    delete tiempoTiro;
+    delete particle;
 }
