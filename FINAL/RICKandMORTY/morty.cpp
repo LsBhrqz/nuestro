@@ -1,15 +1,10 @@
 #include "morty.h"
 
-//Morty::Morty(){
-
-//}
-/*
-void Morty::paint(QPainter *painter){
-    QPixmap pixmap;
-    pixmap.load(":/img/Mortyfrente.png");
-    painter->drawPixmap(boundingRect(), pixmap, pixmap.rect());
+Morty::Morty(){
+    setPixmap(QPixmap(":/img/Mortyfrente.png"));
+    anchoObj= 83; altoObj=110; gravedad=9.81; coefRest=0;
 }
-*/
-int Morty::getVida(){
-    return saludMorty;
+
+void Morty::gameOver(){
+
 }

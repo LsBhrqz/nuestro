@@ -18,6 +18,10 @@ void modelo::constructor(double _xIn, double _yIn, double _angTiro, double _velI
     altoObj = _altoObj;
     anchoPant = _anchoPant;
     altoPant = _altoPant;
+
+    //barraVida= nullptr;
+    //barraVida->setRange(0,100);
+    //barraVida->setValue(100);
 }
 
 void modelo::setValues(){
@@ -130,6 +134,107 @@ double modelo::getcoordY(){
 
 double modelo::angAleatorio(){
     srand(time(NULL));
-    double angPar = 90 + rand()% (271 - 90);
-    return angPar;
+    double num = 90 + rand()% (271 - 90);
+    return num;
 }
+
+/*
+void modelo::colisionEnemigo(double posInX, double posInY, double anchoIn, double altoIn, double posDestX, double posDestY, double anchoDest, double altoDest){
+    int arreglo1[4]={posInX,posInY,anchoIn,altoIn};
+    int arreglo2[4]={posDestX,posDestY,anchoDest, altoDest};
+    int interseccion[4]={0,0,0,0};
+    int x=0,y=1, w=2,h=3;
+
+    //Primero comparo si los arreglos son iguales
+    if(arreglo1[x]==arreglo2[x] && (arreglo1[x]+arreglo1[w] == arreglo2[x]+ arreglo2[w]) ){
+        if(arreglo1[y]==arreglo2[y] && (arreglo1[y]+arreglo1[h] == arreglo2[y]+ arreglo2[h])){
+            interseccion[x]= arreglo1[x];interseccion[y]= arreglo1[y];
+            interseccion[w]= arreglo1[w];interseccion[h]= arreglo1[h];
+            colEnemigo = true;
+        }
+    }else{
+        //En este caso puede que haya una parte dentro de otra o que no haya interseccion
+
+        //Comparo las x
+        if((arreglo1[x] >= arreglo2[x])){
+            //Determino la que está más a la derecha
+            interseccion[x]=arreglo1[x];
+
+            //Verifico si la interseccion no existe
+            if((arreglo2[x] + arreglo2[w]) <= arreglo1[x]){
+
+                //Las x de una figura están dentro de la otra
+            }else if(arreglo1[x]+arreglo1[w] <= arreglo2[x]+arreglo2[w]){
+                interseccion[w]= arreglo1[x]+arreglo1[w]-interseccion[x];
+
+                //Una x está dentro de una figura
+            }else{
+                interseccion[w]=arreglo2[x]+arreglo2[w]-interseccion[x];
+            }
+
+        }else{
+
+            //Determino la que está más a la derecha
+            interseccion[x]=arreglo2[x];
+
+            //Verifico si la interseccion no existe
+            if((arreglo1[x]+ arreglo1[w])<= arreglo2[x]){
+
+                //Las x de una figura están dentro de la otra
+            }else if(arreglo2[x]+arreglo2[w] <= arreglo1[x]+arreglo1[w]){
+                interseccion[w]= arreglo2[x]+arreglo2[w]-interseccion[x];
+
+                //Una x está dentro de la figura
+            }else{
+                interseccion[w]=arreglo1[x]+arreglo1[w]-interseccion[x];
+            }
+        }
+
+        //Despues comparo las y
+        if((arreglo1[y] >= arreglo2[y])){
+
+            //Determino la y que está más abajo
+            interseccion[y]=arreglo2[y];
+
+            //Evaluo si no existe la intersecion
+            if((arreglo1[y] + arreglo1[h]) <= arreglo2[y]){
+
+                //Las y están dentro de la otra figura
+            }else if( (arreglo1[y] + arreglo1[h]) >= (arreglo2[y] + arreglo2[h]) ){
+                interseccion[h]= arreglo2[y] + arreglo2[h] - interseccion[y];
+
+                //Unas y están dentro de ula otra figura
+            }else{
+                interseccion[h]= arreglo1[y] + arreglo1[h] - interseccion[y];
+            }
+
+        }else{
+
+            //Determino la y que está más abajo
+            interseccion[y]=arreglo1[y];
+
+            //Evaluo si no existe la intersecion
+            if((arreglo2[y] + arreglo2[h]) <= arreglo1[y]){
+
+                //Las y están dentro de la otra figura
+            }else if( (arreglo2[y] + arreglo2[h]) >= (arreglo1[y] + arreglo1[h]) ){
+                interseccion[h]= arreglo1[y] + arreglo1[h] - interseccion[y];
+
+                //Unas y están dentro de ula otra figura
+            }else{
+                interseccion[h]= arreglo2[y] + arreglo2[h] - interseccion[y];
+            }
+        }
+    }
+    for(int i = 0; i<4; i++){
+        if(interseccion[i] == 0){
+            colEnemigo = false;
+        }
+        else{
+            colEnemigo = true;
+            break;
+        }
+
+    }
+}
+*/

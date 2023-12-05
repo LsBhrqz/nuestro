@@ -5,23 +5,19 @@
 
 class Morty : public modelo
 {
-private:
+public:
+    Morty();
     int saludMorty;
     arma equipada;
-public:
-    //Morty();
-    //QRectF boundingRect() const;
-    /*void manejarMorty();
+    void manejarMorty();
     void dispararMorty();
     void gameOver();
-    //void paint(QPainter *painter);
-    */
-    int getVida();
-
+    bool moverI=false;
+    bool moverD= false;
+    bool moverArr= false;
+    bool moverAb= false;
+    int contadorposicionmorty=0;
 };
 
 
 #endif // MORTY_H
-
-
-

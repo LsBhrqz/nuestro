@@ -21,7 +21,8 @@
 
 using namespace std;
 
-class modelo : public QObject{
+class modelo : public QObject, public QGraphicsPixmapItem
+{
 public:
     bool movimiento = true;
     double velInicial;
@@ -40,6 +41,7 @@ public:
     double altoObj;
     double anchoPant;
     double altoPant;
+    bool colEnemigo;
 
     void constructor(double _xIn, double _yIn, double _angTiro, double _velInicial, bool _Grav, double _anchoObj, double _altoObj, double _anchoPant, double _altoPant);
 
@@ -62,6 +64,8 @@ public:
     double getcoordX();
 
     double getcoordY();
+
+    //void colisionEnemigo(double posInX, double posInY, double anchoIn, double altoIn, double posDestX, double posDestY, double anchoDest, double altoDest);
 
     double angAleatorio();
 };
