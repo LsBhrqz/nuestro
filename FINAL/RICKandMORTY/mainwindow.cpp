@@ -90,13 +90,15 @@ void MainWindow::on_Nivel1_Clicked()
         }else{
             hepatitisB->setPixmap(QPixmap(":/img/hepatitisb3.png"));
             arma* bola = new arma;
-            bola->constructor(890, 460, 190, 20, false, 30, 30, 1280, 722);
+            bola->ubicarMorty(300,700, 890, 460);//aquí va el morty->posiciones en equiz y lle, en los dos primeros parámetros
+            bola->constructor(890, 460, bola->angTiro, 20, false, 30, 30, 1280, 722);
+
             yoeralabola();
             disparar(bola);
 }
         hepatitisB->cambiarCara();
     });
-    cronometro->start(2000);
+    cronometro->start(500);
 }
 
 void MainWindow::yoeralabola(){

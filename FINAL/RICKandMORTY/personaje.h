@@ -14,6 +14,7 @@ public:
     void morir();
     void herido();
     void cambiarCara();
+
 };
 
 #endif // PERSONAJE_H

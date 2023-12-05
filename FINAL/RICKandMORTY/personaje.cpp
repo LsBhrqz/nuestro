@@ -30,3 +30,4 @@ void personaje::cambiarCara() {
         cara = 0;
     }
 }
+

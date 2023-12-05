@@ -74,3 +74,9 @@ bool arma::impacto(double coordXenemigo, double coordYenemigo, double anchoEnemi
 
     return false;
 }
+
+void arma::ubicarMorty(double coordXmorty, double coordYmorty, double coordInx, double coordIny){
+    coordXmorty = coordXmorty - coordInx ;
+    coordYmorty = coordIny - coordYmorty;
+    angTiro = atan2(coordYmorty,coordXmorty) * 180 / M_PI;
+}
